@@ -1,8 +1,9 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <string.h>
 
-// clang++ -o main -fsanitize=address -std=c++11 ./main.cpp
+// clang++ -o main -D_GLIBCXX_DEBUG -fsanitize=address -std=c++11 -O1 -g ./cpp_leak_sample.cpp
 
 void leak_sample1()
 {
@@ -46,6 +47,9 @@ void leak_sample2()
 		if (n < 5)
 		{
 			ptr = new char[n];
+			// 这个地方将会检查出内存越界
+			// heap-buffer-overflow
+			memset((void *)ptr,0,n+1);
 			vec.push_back(ptr);
 		}
 		else
@@ -61,5 +65,6 @@ void leak_sample2()
 int main(int agrn, char* argc[])
 {
 	leak_sample1();
+	leak_sample2();
 	return 0;
 }
