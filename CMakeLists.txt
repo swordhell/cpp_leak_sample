@@ -1,3 +1,6 @@
+# mkdir build;cd build
+# cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+
 cmake_minimum_required (VERSION 3.0)
 project (cpp_leak_sample)
 
