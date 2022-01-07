@@ -78,10 +78,33 @@ void test_new_delete()
 	}
 }
 
+class A
+{
+public:
+	A()=default;
+	~A(){
+		std::cout << "~A\n";
+	}
+};
+
+void test_vector_clear()
+{
+	std::vector<char *> vec;
+	std::vector<A> vecA;
+	for(int i = 0; i< 2; i++)
+	{
+		vec.push_back(new char[2]);
+		vecA.emplace_back();
+	}
+	vec.clear();
+	vecA.clear();
+}
+
 int main(int agrn, char* argc[])
 {
+	test_vector_clear();
 	//leak_sample1();
 	//leak_sample2();
-	test_new_delete();
+	// test_new_delete();
 	return 0;
 }
